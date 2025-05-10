@@ -17,9 +17,9 @@ const Counter = () => {
       <div className="counter">
         <div className="counter-div">
             <h2>COUNT : {count}</h2>
-            <button className="counter-btn" onClick={()=>handleCount("increment")}>Increment</button>
-            <button className="counter-btn" onClick={()=>handleCount("decrement")}>Decrement</button>
+            <button className="counter-btn" id="increment" onClick={()=>handleCount("increment")}>Increment</button>
             <button className="counter-btn" onClick={()=>handleCount("reset")}>Reset</button>
+            <button className="counter-btn" id="decrement" onClick={()=>handleCount("decrement")}>Decrement</button>
         </div>
       </div>
     </div>

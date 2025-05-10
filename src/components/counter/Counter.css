@@ -12,7 +12,7 @@
 .counter-div{
     width: 50%;
     height: 150px;
-    background-color: rgb(159, 250, 252);
+    background-color: rgb(195, 247, 248);
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,13 @@
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
-    border: 1px solid rgb(116, 116, 116);
+    border:none;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
+}
+.counter-btn#increment{
+    background-color: green;
+}
+.counter-btn#decrement{
+    background-color: red;
 }
