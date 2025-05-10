@@ -1,12 +1,29 @@
-# React + Vite
+# interview-prep-afford
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A curated collection of frontend and backend interview prep code snippets, projects, and learning exercises.
 
-Currently, two official plugins are available:
+This repository serves as my personal playground to explore important programming concepts and patterns often asked in interviews. Each folder contains a focused topic with clean and commented code examples.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Topics Covered
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ Debounce in React (search bar using lodash debounce)
+- ⏳ More topics coming soon...
+
+---
+
+## 🧠 What I’ve Learned
+
+### 🔄 Debounce
+
+The debounce technique helps optimize performance by limiting how often a function (like an API call) is triggered. For example, in a search bar, debounce waits for the user to stop typing before making the API request — reducing unnecessary network traffic.
+
+- 🛠 Implemented using lodash.debounce
+- 🎯 Used React useState, useEffect, and useCallback
+- 📁 Structured with separate dummy API and data files
+
+---
+
+## 📁 Project Structure
+
