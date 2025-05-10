@@ -1,12 +1,8 @@
-import React from 'react'
-import SearchBar from './components/SearchBar'
-import UserSearchPage from './pages/UserSearchPage'
+import Counter from './components/counter/Counter.jsx'
 const App = () => {
   return (
     <div>
-      Searchbar using Debounce
-      <SearchBar/>
-      <UserSearchPage/>
+      <Counter/>
     </div>
   )
 }
