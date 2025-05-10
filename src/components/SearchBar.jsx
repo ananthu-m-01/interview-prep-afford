@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce';
 import React, { useCallback, useEffect, useState } from 'react';
-import searchItems from '../../api/searchItems';
+import searchItems from '../api/searchItems';
 import './SearchBar.css';
 const SearchBar = () => {
 

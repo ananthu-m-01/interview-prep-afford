@@ -1,10 +1,12 @@
 import React from 'react'
-import SearchBar from './assets/components/SearchBar'
+import SearchBar from './components/SearchBar'
+import UserSearchPage from './pages/UserSearchPage'
 const App = () => {
   return (
     <div>
       Searchbar using Debounce
       <SearchBar/>
+      <UserSearchPage/>
     </div>
   )
 }
