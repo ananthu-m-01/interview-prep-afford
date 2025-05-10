@@ -25,5 +25,3 @@ The debounce technique helps optimize performance by limiting how often a functi
 
 ---
 
-## 📁 Project Structure
-
