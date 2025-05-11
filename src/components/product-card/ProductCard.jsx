@@ -1,18 +1,38 @@
 import { observer } from 'mobx-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './ProductCard.css';
 import productStore from './store';
 
 const ProductCard = observer(() => {
-  const { products, filtered, search, sortOrder, category, categories, cart, showPopup, popupMessage } = productStore;
+  const {
+    filtered,
+    search,
+    sortOrder,
+    category,
+    categories,
+    cart,
+    showPopup,
+    popupMessage
+  } = productStore;
+
+  const [searchInput, setSearchInput] = useState(search);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products')
       .then(res => res.json())
       .then(data => {
-        productStore.setProducts(data.products);
-      });
+        productStore.setProducts(data.products); // ✅ direct method call
+      })
+      .catch(err => console.error('Failed to fetch products:', err));
   }, []);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      productStore.setSearch(searchInput); // ✅ direct method call
+    }, 300); // debounce delay
+
+    return () => clearTimeout(handler);
+  }, [searchInput]);
 
   return (
     <div className="card-main">
@@ -22,8 +42,8 @@ const ProductCard = observer(() => {
         <input
           type="text"
           placeholder="Search by title..."
-          value={search}
-          onChange={e => productStore.setSearch(e.target.value)}
+          value={searchInput}
+          onChange={e => setSearchInput(e.target.value)}
           className="search-input"
         />
 

@@ -1,99 +1,92 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 class ProductStore {
   products = [];
-  filtered = [];
-  cart = [];
   search = '';
   sortOrder = '';
   category = 'All';
-  categories = [];
-  showPopup = false;
+  cart = [];
   popupMessage = '';
+  showPopup = false;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this); // MobX auto observables and actions
+  }
+
+  get categories() {
+    const all = this.products.map(p => p.category);
+    return ['All', ...new Set(all)];
+  }
+
+  get filtered() {
+    let filtered = this.products;
+
+    if (this.search) {
+      filtered = filtered.filter(product =>
+        product.title.toLowerCase().includes(this.search.toLowerCase())
+      );
+    }
+
+    if (this.category && this.category !== 'All') {
+      filtered = filtered.filter(product => product.category === this.category);
+    }
+
+    if (this.sortOrder === 'asc') {
+      filtered = filtered.slice().sort((a, b) => a.price - b.price);
+    } else if (this.sortOrder === 'desc') {
+      filtered = filtered.slice().sort((a, b) => b.price - a.price);
+    }
+
+    return filtered;
   }
 
   setProducts(products) {
     this.products = products;
-    this.filtered = products;
-    this.categories = ['All', ...new Set(products.map(p => p.category))];
   }
 
-  setSearch(search) {
-    this.search = search;
-    this.filterProducts();
+  setSearch(value) {
+    this.search = value;
   }
 
-  setSortOrder(order) {
-    this.sortOrder = order;
-    this.filterProducts();
+  setSortOrder(value) {
+    this.sortOrder = value;
   }
 
-  setCategory(category) {
-    this.category = category;
-    this.filterProducts();
+  setCategory(value) {
+    this.category = value;
   }
 
   addToCart(product) {
-    const existingProduct = this.cart.find(p => p.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity += 1;
+    const existing = this.cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
     } else {
       this.cart.push({ ...product, quantity: 1 });
     }
-
     this.showPopupMessage(`${product.title} added to cart!`);
   }
 
   updateQuantity(id, action) {
-    const product = this.cart.find(p => p.id === id);
-    if (product) {
-      if (action === 'increase') {
-        product.quantity += 1;
-      } else if (action === 'decrease' && product.quantity > 1) {
-        product.quantity -= 1;
-      }
-    }
+    const item = this.cart.find(i => i.id === id);
+    if (!item) return;
+
+    if (action === 'increase') item.quantity++;
+    else if (action === 'decrease') item.quantity = Math.max(1, item.quantity - 1);
   }
 
   removeFromCart(id) {
-    this.cart = this.cart.filter(p => p.id !== id);
+    this.cart = this.cart.filter(i => i.id !== id);
   }
 
   showPopupMessage(message) {
     this.popupMessage = message;
     this.showPopup = true;
+
     setTimeout(() => {
-      this.showPopup = false;
-      this.popupMessage = '';
+      runInAction(() => {
+        this.showPopup = false;
+      });
     }, 2000);
-  }
-
-  filterProducts() {
-    let result = [...this.products];
-
-    // Search filter
-    if (this.search.trim()) {
-      result = result.filter(product =>
-        product.title.toLowerCase().includes(this.search.toLowerCase())
-      );
-    }
-
-    // Category filter
-    if (this.category !== 'All') {
-      result = result.filter(product => product.category === this.category);
-    }
-
-    // Sort by price
-    if (this.sortOrder === 'asc') {
-      result.sort((a, b) => a.price - b.price);
-    } else if (this.sortOrder === 'desc') {
-      result.sort((a, b) => b.price - a.price);
-    }
-
-    this.filtered = result;
   }
 }
 

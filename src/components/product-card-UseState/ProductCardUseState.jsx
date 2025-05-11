@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import './ProductCard.css';
+import '../product-card/ProductCard.css';
 
 const ProductCardUseState = () => {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('');
   const [category, setCategory] = useState('All');
   const [categories, setCategories] = useState([]);
@@ -21,17 +22,26 @@ const ProductCardUseState = () => {
       });
   }, []);
 
+  // Debounce the search input
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 1000); // 300ms debounce delay
+
+    return () => clearTimeout(handler);
+  }, [search]);
+
   useEffect(() => {
     filterProducts();
-  }, [search, sortOrder, category, products]);
+  }, [debouncedSearch, sortOrder, category, products]);
 
   const filterProducts = () => {
     let result = [...products];
 
     // Search filter
-    if (search.trim()) {
+    if (debouncedSearch.trim()) {
       result = result.filter(product =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(debouncedSearch.toLowerCase())
       );
     }
 
