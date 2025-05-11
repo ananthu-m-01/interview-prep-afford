@@ -1,0 +1,36 @@
+.counter{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.counter-head{
+    text-align: center;
+}
+.counter-div{
+    width: 50%;
+    height: 150px;
+    background-color: rgb(195, 247, 248);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.counter-btn{
+    width: 100px;
+    height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border:none;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
+.counter-btn#increment{
+    background-color: green;
+}
+.counter-btn#decrement{
+    background-color: red;
+}

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Calculator from './components/calculator/Calculator.jsx'
+import CounterMobX from './components/counter-mobx/CounterMobX.jsx'
 import Counter from "./components/counter/Counter.jsx"
 import FetchUser from './components/fetch-user/FetchUser.jsx'
 import ProductCardUseState from './components/product-card-UseState/ProductCardUseState.jsx'
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/fetch-user' element={<FetchUser/>}></Route>
         <Route path='/product-card' element={<ProductCard/>}></Route>
         <Route path='/product-card-useState' element={<ProductCardUseState/>}></Route>
+        <Route path='/counter-mobx' element={<CounterMobX/>}></Route>
      </Routes>
     </div>
   )

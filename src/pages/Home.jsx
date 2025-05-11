@@ -10,6 +10,7 @@ const Home = () => {
         <li><Link to='/fetch-user'>Fetch User</Link></li>
         <li><Link to='/product-card'>Product Card - MobX</Link></li>
         <li><Link to='/product-card-useState'>Product Card - UseState</Link></li>
+        <li><Link to='/counter-mobx'>Counter MobX</Link></li>
       </ul>
     </div>
   )
